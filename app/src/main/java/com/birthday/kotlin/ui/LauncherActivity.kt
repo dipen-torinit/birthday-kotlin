@@ -1,7 +1,6 @@
 package com.birthday.kotlin.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -11,6 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.birthday.kotlin.R
 import com.birthday.kotlin.databinding.ActivityLauncherBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import hide
+import show
 
 class LauncherActivity : AppCompatActivity() {
 
@@ -56,7 +57,12 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     fun setFullScreen(showFullScreen: Boolean) {
-        binding.toolbar.visibility = if (showFullScreen) View.GONE else View.VISIBLE
-        binding.navView.visibility = if (showFullScreen) View.GONE else View.VISIBLE
+        if (showFullScreen) {
+            binding.toolbar.show()
+            binding.navView.show()
+        } else {
+            binding.toolbar.hide()
+            binding.navView.hide()
+        }
     }
 }

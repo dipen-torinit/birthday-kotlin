@@ -2,7 +2,6 @@ package com.birthday.kotlin.ui.auth
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.birthday.kotlin.R
 import com.birthday.kotlin.databinding.FragmentLoginBinding
@@ -16,14 +15,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFullScreen(true)
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
+        setFullScreen(false)
+        binding.loginidEt.setOnClickListener {
+
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        setFullScreen(false)
+        setFullScreen(true)
     }
 }

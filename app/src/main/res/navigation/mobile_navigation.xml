@@ -9,28 +9,24 @@
         android:id="@+id/loginFragment"
         android:name="com.birthday.kotlin.ui.auth.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
-    </fragment>
+        tools:layout="@layout/fragment_login"/>
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.birthday.kotlin.ui.home.HomeFragment"
+        android:name="com.birthday.kotlin.ui.todays.TodaysBirthdayFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_todays_birthday" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.birthday.kotlin.ui.dashboard.DashboardFragment"
+        android:name="com.birthday.kotlin.ui.all.AllBirthdayFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_all_birthdays" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.birthday.kotlin.ui.notifications.NotificationsFragment"
+        android:name="com.birthday.kotlin.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

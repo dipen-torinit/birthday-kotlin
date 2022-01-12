@@ -1,10 +1,10 @@
-package com.birthday.kotlin.ui.home
+package com.birthday.kotlin.ui.todays
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class TodaysBirthdayViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
