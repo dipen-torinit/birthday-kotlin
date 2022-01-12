@@ -6,6 +6,13 @@
         <entry key="app/src/main/res/drawable/ic_app_icon.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_event_24.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_birthday_splash_icon.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.2188183807439825" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23802083333333332" />
       </map>
     </option>
   </component>
