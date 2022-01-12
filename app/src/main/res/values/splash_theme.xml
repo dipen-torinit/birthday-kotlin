@@ -6,7 +6,7 @@
 
         // Use windowSplashScreenAnimatedIcon to add either a drawable or an
         // animated drawable. One of these is required.
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_event_24</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_birthday_splash_icon</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         # Required for
         # animated icons
