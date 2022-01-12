@@ -10,9 +10,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.birthday.kotlin.R
 import com.birthday.kotlin.databinding.ActivityLauncherBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import hide
 import show
 
+@AndroidEntryPoint
 class LauncherActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLauncherBinding
