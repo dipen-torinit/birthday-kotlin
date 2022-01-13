@@ -46,16 +46,12 @@ class LauncherActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_birthday_list, R.id.navigation_add_birthday, R.id.navigation_settings
             ),
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
     }
 
     fun setFullScreen(showFullScreen: Boolean) {

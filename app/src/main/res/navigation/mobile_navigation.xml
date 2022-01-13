@@ -10,29 +10,36 @@
         android:name="com.birthday.kotlin.ui.auth.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/fragment_login">
+
         <action
-            android:id="@+id/action_loginFragment_to_navigation_home"
-            app:destination="@id/navigation_home"
+            android:id="@+id/action_loginFragment_to_navigation_birthday_list"
+            app:destination="@id/navigation_birthday_list"
             app:popUpTo="@id/mobile_navigation"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.birthday.kotlin.ui.todays.TodaysBirthdayFragment"
-        android:label="@string/title_home"
+        android:id="@+id/navigation_birthday_list"
+        android:name="com.birthday.kotlin.ui.birthdaylist.BirthdayListFragment"
+        android:label="@string/birthday_list"
         tools:layout="@layout/fragment_todays_birthday" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.birthday.kotlin.ui.all.AllBirthdayFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_add_birthday"
+        android:name="com.birthday.kotlin.ui.all.AddBirthdayFragment"
+        android:label="@string/add_birthday"
         tools:layout="@layout/fragment_all_birthdays" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:name="com.birthday.kotlin.ui.settings.SettingsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_settings" />
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

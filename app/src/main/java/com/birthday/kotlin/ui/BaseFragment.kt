@@ -3,7 +3,6 @@ package com.birthday.kotlin.ui
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
@@ -20,8 +19,21 @@ abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
         }
     }
 
+    /*
+    * Setup View, Listener etc.
+    * */
     abstract fun setupView()
-    abstract fun initObserver()
+
+    /*
+    * Initialize LiveData observer or Flow collector
+    * */
+    abstract fun setupCollector()
+
+    /*
+    * Execute all the calls that we want to execute when fragment is launched.
+    * This function needs to be called from "onResume" method...if we call it from "onViewCreated" then Flow is unable to collect the data
+    * */
+    abstract fun executeCallsWhenResume()
 
     fun <K> collectFlow(flow: SharedFlow<K>, function: (K) -> Unit) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {

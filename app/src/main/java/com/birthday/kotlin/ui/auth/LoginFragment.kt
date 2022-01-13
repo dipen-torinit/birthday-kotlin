@@ -21,7 +21,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         setFullScreen(false)
 
         setupView()
-        initObserver()
+        setupCollector()
+    }
+
+    override fun executeCallsWhenResume() {
+        viewModel.checkIfAlreadyLoggedIn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        executeCallsWhenResume()
     }
 
     override fun onDestroyView() {
@@ -33,11 +42,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         binding.loginBtn.setOnClickListener {
             viewModel.signIn(binding.loginidEt.text.toString(), binding.passwordEt.text.toString())
         }
-
-        viewModel.checkIfAlreadyLoggedIn()
     }
 
-    override fun initObserver() {
+    override fun setupCollector() {
 
         /*
         * For collecting different flow we have to create separate coroutine-scope(launchWhenStarted)
@@ -106,15 +113,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         collectFlow(viewModel.isLogIn, function = {
             if (it.isSuccess) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationBirthdayList())
             } else {
                 showToast(it.exceptionOrNull().toString())
             }
         })
 
         collectFlow(viewModel.isAlreadyLoggedIn) {
-            showToast("Result $it")
-            if (it) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
+            if (it) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationBirthdayList())
         }
     }
 }

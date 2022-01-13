@@ -17,11 +17,15 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth)
     }
 
     fun checkIfAlreadyLoggedIn(): Boolean {
+        return firebaseAuth.currentUser?.uid?.let {
+            true
+        } ?: run {
+            false
+        }
+    }
+
+    fun logOut(): Boolean {
+        firebaseAuth.signOut()
         return true
-//        return firebaseAuth.currentUser?.uid?.let {
-//            true
-//        } ?: run {
-//            false
-//        }
     }
 }

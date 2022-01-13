@@ -1,17 +1,22 @@
 package com.birthday.kotlin.ui.settings
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.lifecycle.viewModelScope
+import com.birthday.kotlin.repository.AuthRepository
+import com.birthday.kotlin.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(): ViewModel() {
+class SettingsViewModel @Inject constructor(private val authRepository: AuthRepository): BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private val _logOut = MutableSharedFlow<Boolean>()
+    val logOut = _logOut.asSharedFlow()
+
+    fun logOut() = viewModelScope.launch {
+        authRepository.logOut()
+        _logOut.emit(true)
     }
-    val text: LiveData<String> = _text
 }
