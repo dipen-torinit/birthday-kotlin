@@ -67,4 +67,12 @@ class LauncherActivity : AppCompatActivity() {
             binding.navView.hide()
         }
     }
+
+    fun showProgress(){
+        binding.progressBar.show()
+    }
+
+    fun hideProgress(){
+        binding.progressBar.hide()
+    }
 }

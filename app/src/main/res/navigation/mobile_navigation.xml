@@ -9,7 +9,13 @@
         android:id="@+id/loginFragment"
         android:name="com.birthday.kotlin.ui.auth.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"

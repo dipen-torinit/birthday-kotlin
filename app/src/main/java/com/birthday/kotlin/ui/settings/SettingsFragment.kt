@@ -6,5 +6,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
+    override fun setupView() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initObserver() {
+        TODO("Not yet implemented")
+    }
 
 }
