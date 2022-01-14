@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.birthdaylist.BirthdayListFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/birthday_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

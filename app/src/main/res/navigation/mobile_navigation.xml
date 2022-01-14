@@ -22,13 +22,13 @@
         android:id="@+id/navigation_birthday_list"
         android:name="com.birthday.kotlin.ui.birthdaylist.BirthdayListFragment"
         android:label="@string/birthday_list"
-        tools:layout="@layout/fragment_todays_birthday" />
+        tools:layout="@layout/fragment_birthday_list" />
 
     <fragment
         android:id="@+id/navigation_add_birthday"
         android:name="com.birthday.kotlin.ui.all.AddBirthdayFragment"
         android:label="@string/add_birthday"
-        tools:layout="@layout/fragment_all_birthdays" />
+        tools:layout="@layout/fragment_add_birthday" />
 
     <fragment
         android:id="@+id/navigation_settings"

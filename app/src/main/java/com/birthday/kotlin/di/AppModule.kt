@@ -1,6 +1,7 @@
 package com.birthday.kotlin.di
 
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFirebaseAuthReference() = Firebase.auth
+
+    @Provides
+    @Singleton
+    fun provideFirebaseDBReference() = FirebaseDatabase.getInstance()
 }

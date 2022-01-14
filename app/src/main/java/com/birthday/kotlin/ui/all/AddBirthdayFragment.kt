@@ -5,18 +5,16 @@ import com.birthday.kotlin.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddBirthdayFragment : BaseFragment(R.layout.fragment_all_birthdays) {
+class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
     override fun setupView() {
-        TODO("Not yet implemented")
+
     }
 
     override fun executeCallsWhenResume() {
-        TODO("Not yet implemented")
+
     }
 
     override fun setupCollector() {
-        TODO("Not yet implemented")
+
     }
-
-
 }
