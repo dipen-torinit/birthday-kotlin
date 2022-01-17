@@ -1,4 +1,4 @@
-package com.birthday.kotlin.ui.all
+package com.birthday.kotlin.ui.add
 
 import com.birthday.kotlin.R
 import com.birthday.kotlin.ui.BaseFragment

@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_add_birthday"
-        android:name="com.birthday.kotlin.ui.all.AddBirthdayFragment"
+        android:name="com.birthday.kotlin.ui.add.AddBirthdayFragment"
         android:label="@string/add_birthday"
         tools:layout="@layout/fragment_add_birthday" />
 
