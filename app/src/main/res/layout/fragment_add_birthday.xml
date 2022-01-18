@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.birthday.kotlin.ui.add.AddBirthdayViewModel" />
-
-        <variable
-            name="name"
-            type="String" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -84,18 +80,12 @@
                 android:id="@+id/add_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="@{viewModel.isFormValid()}"
                 android:text="@string/add_birthday"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dob_til" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.temp}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_btn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

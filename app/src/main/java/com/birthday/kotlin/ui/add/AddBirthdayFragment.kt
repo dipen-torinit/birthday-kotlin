@@ -3,11 +3,9 @@ package com.birthday.kotlin.ui.add
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.birthday.kotlin.R
 import com.birthday.kotlin.databinding.FragmentAddBirthdayBinding
-import com.birthday.kotlin.databinding.FragmentLoginBinding
 import com.birthday.kotlin.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +29,7 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
 
     override fun setupView() {
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun executeCallsWhenResume() {
@@ -39,8 +37,6 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
     }
 
     override fun setupCollector() {
-        collectFlow(viewModel.isFormValid) {
-            viewModel.setTempValue(if (it) "Valid" else "Invalid")
-        }
+
     }
 }
