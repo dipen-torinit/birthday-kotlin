@@ -9,4 +9,8 @@
     <string name="birthdays">Birthdays</string>
     <string name="birthday_list">Birthday List</string>
     <string name="add_birthday">Add Birthday</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_phone">Enter phone</string>
+    <string name="enter_dob">Enter DOB(DD/MM/YYYY)</string>
 </resources>

@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.2188183807439825" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/birthday_list_item.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_add_birthday.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_all_birthdays.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_birthday_list.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23802083333333332" />
@@ -26,6 +27,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/fragment_todays_birthday.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/layout/text_input.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23802083333333332" />
       </map>
     </option>
