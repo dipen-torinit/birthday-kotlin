@@ -20,8 +20,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         setFullScreen(false)
 
-        setupView()
-        setupCollector()
+        setupViews()
+        setupCollectors()
     }
 
     override fun executeCallsWhenResume() {
@@ -38,13 +38,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         setFullScreen(true)
     }
 
-    override fun setupView() {
+    override fun setupViews() {
         binding.loginBtn.setOnClickListener {
             viewModel.signIn(binding.loginidEt.text.toString(), binding.passwordEt.text.toString())
         }
     }
 
-    override fun setupCollector() {
+    override fun setupCollectors() {
 
         /*
         * For collecting different flow we have to create separate coroutine-scope(launchWhenStarted)

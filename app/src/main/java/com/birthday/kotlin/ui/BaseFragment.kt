@@ -24,12 +24,12 @@ abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
     /*
     * Setup View, Listener etc.
     * */
-    abstract fun setupView()
+    abstract fun setupViews()
 
     /*
     * Initialize LiveData observer or Flow collector
     * */
-    abstract fun setupCollector()
+    abstract fun setupCollectors()
 
     /*
     * Execute all the calls that we want to execute when fragment is launched.

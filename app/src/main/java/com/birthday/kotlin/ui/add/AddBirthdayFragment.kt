@@ -18,8 +18,8 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
-        setupCollector()
+        setupViews()
+        setupCollectors()
     }
 
     override fun onResume() {
@@ -27,7 +27,7 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
         executeCallsWhenResume()
     }
 
-    override fun setupView() {
+    override fun setupViews() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
     }
@@ -36,7 +36,7 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
 
     }
 
-    override fun setupCollector() {
+    override fun setupCollectors() {
 
     }
 }

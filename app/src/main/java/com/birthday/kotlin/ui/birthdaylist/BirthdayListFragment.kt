@@ -18,8 +18,8 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
-        setupCollector()
+        setupViews()
+        setupCollectors()
     }
 
     override fun onResume() {
@@ -27,7 +27,7 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
         executeCallsWhenResume()
     }
 
-    override fun setupView() {
+    override fun setupViews() {
 
     }
 
@@ -35,7 +35,7 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
         viewModel.fetchBirthdays()
     }
 
-    override fun setupCollector() {
+    override fun setupCollectors() {
         collectFlow(viewModel.isLoading, function = {
             showProgress(it)
         })

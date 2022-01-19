@@ -18,11 +18,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
-        setupCollector()
+        setupViews()
+        setupCollectors()
     }
 
-    override fun setupView() {
+    override fun setupViews() {
         binding.logoutBtn.setOnClickListener {
             viewModel.logOut()
         }
@@ -32,7 +32,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     }
 
-    override fun setupCollector() {
+    override fun setupCollectors() {
         collectFlow(viewModel.logOut) {
             findNavController().navigate(SettingsFragmentDirections.actionNavigationSettingsToLoginFragment())
         }
