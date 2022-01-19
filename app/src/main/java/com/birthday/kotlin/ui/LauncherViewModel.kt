@@ -10,15 +10,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LauncherViewModel @Inject constructor(): ViewModel() {
+class LauncherViewModel @Inject constructor(): BaseViewModel() {
 
-    private val _isLoading = MutableStateFlow(true)
-    val isLoading = _isLoading.asStateFlow()
+    private val _isSplashScreenLoading = MutableStateFlow(true)
+    val isSplashScreenLoading = _isSplashScreenLoading.asStateFlow()
 
     init {
+        //Dummy delay for showing splash screen
         viewModelScope.launch {
             delay(3000)
-            _isLoading.value = false
+            _isSplashScreenLoading.value = false
         }
     }
 }

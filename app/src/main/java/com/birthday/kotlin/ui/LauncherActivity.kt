@@ -26,7 +26,7 @@ class LauncherActivity : AppCompatActivity() {
         //Splash screen configuration
         installSplashScreen().apply {
             setKeepVisibleCondition {
-                mainViewModel.isLoading.value
+                mainViewModel.isSplashScreenLoading.value
             }
         }
 
