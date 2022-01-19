@@ -107,9 +107,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         /*
         * We can create a helper function which can remove redundant code
         * */
-        collectFlow(viewModel.isLoading, function = {
-            showProgress(it)
-        })
 
         collectFlow(viewModel.isLogIn, function = {
             if (it.isSuccess) {

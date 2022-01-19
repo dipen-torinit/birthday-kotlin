@@ -8,17 +8,21 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.birthday.kotlin.R
+import com.birthday.kotlin.data.LoadingEvent
 import com.birthday.kotlin.databinding.ActivityLauncherBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import hide
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import show
 
 @AndroidEntryPoint
 class LauncherActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLauncherBinding
-    private val mainViewModel: LauncherViewModel by viewModels()
+    private val viewModel: LauncherViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +30,7 @@ class LauncherActivity : AppCompatActivity() {
         //Splash screen configuration
         installSplashScreen().apply {
             setKeepVisibleCondition {
-                mainViewModel.isSplashScreenLoading.value
+                viewModel.isSplashScreenLoading.value
             }
         }
 
@@ -34,6 +38,24 @@ class LauncherActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this);
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    /* Handling the ProgressBar here
+    *  Whenever BaseViewModel fire event from "startLoading" & "stopLoading" this method will be called and we can show/hide progress based on the EventType
+    * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onLoadingEvent(loadingEvent: LoadingEvent) {
+        if (loadingEvent.isLoading) showProgress() else hideProgress()
     }
 
     private fun setupViews() {

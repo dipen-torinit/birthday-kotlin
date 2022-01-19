@@ -36,9 +36,6 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
     }
 
     override fun setupCollectors() {
-        collectFlow(viewModel.isLoading, function = {
-            showProgress(it)
-        })
 
         collectFlow(viewModel.personsList) {
             if(it.isSuccess){
