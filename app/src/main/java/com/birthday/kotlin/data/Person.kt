@@ -19,7 +19,7 @@ data class Person(
             "email" to email,
             "phone" to phone,
             "date" to date,
-            "image" to "",
+            "image" to image,
         )
     }
 }

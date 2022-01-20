@@ -1,5 +1,6 @@
 package com.birthday.kotlin.ui.add
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,13 +12,21 @@ import com.birthday.kotlin.data.Person
 import com.birthday.kotlin.repository.BirthdayRepository
 import com.birthday.kotlin.ui.BaseViewModel
 import com.birthday.kotlin.utils.extention.empty
+import com.birthday.kotlin.utils.extention.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: BirthdayRepository) : BaseViewModel() {
+class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: BirthdayRepository) :
+    BaseViewModel() {
+
+    private val _photo = MutableStateFlow<Bitmap?>(null)
+    val photo: StateFlow<Bitmap?> = _photo
+    fun setPhoto(photoBitmap: Bitmap) = viewModelScope.launch {
+        _photo.emit(photoBitmap)
+    }
 
     data class AddBirthdayError(
         val nameError: String = String.empty(),
@@ -47,7 +56,11 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     private val _dob = MutableStateFlow(String.empty())
     val dob: StateFlow<String> = _dob
     fun onDOBTextChanged(text: CharSequence) = viewModelScope.launch {
-        _dob.emit(text.toString())
+        if (text.length == 2 || text.length == 5) {
+            _dob.emit("$text/")
+        } else {
+            _dob.emit(text.toString())
+        }
     }
 
     private val _error = MutableStateFlow(AddBirthdayError())
@@ -87,7 +100,7 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
                     email.value,
                     phone.value,
                     dob.value,
-                    ""
+                    photo.value?.toBase64() ?: run { String.empty() }
                 )
             )
         )
@@ -99,5 +112,6 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
         _email.emit(String.empty())
         _phone.emit(String.empty())
         _dob.emit(String.empty())
+        _photo.emit(null)
     }
 }

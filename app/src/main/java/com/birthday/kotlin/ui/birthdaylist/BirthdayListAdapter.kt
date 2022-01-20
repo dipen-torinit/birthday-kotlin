@@ -38,7 +38,8 @@ class BirthdayListAdapter(private val persons: List<Person>) :
             Glide.with(personImageView.context)
                 .load(Base64.decode(persons[position].image, Base64.DEFAULT))
                 .placeholder(R.drawable.ic_app_icon)
-                .into(personImageView);
+                .error(R.drawable.ic_app_icon)
+                .into(personImageView)
             nameTextView.text = persons[position].name
             emailTextView.text = persons[position].email
             phoneTextView.text = persons[position].phone

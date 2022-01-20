@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_app_icon.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_event_24.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_event_available_24.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_playlist_add_24.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_birthday_splash_icon.xml" value="0.25416666666666665" />
@@ -17,7 +18,7 @@
         <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.2188183807439825" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/birthday_list_item.xml" value="0.23802083333333332" />
-        <entry key="app/src/main/res/layout/fragment_add_birthday.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_add_birthday.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/fragment_all_birthdays.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_birthday_list.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23802083333333332" />

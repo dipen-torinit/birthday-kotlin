@@ -19,13 +19,22 @@
             android:layout_height="match_parent"
             tools:context=".ui.add.AddBirthdayFragment">
 
+            <ImageView
+                android:id="@+id/photo_iv"
+                android:layout_width="@dimen/dp200"
+                android:layout_height="@dimen/dp200"
+                android:src="@drawable/ic_baseline_person_add_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_til"
                 style="@style/CustomTextInputLayout"
                 app:error="@{viewModel.error.nameError}"
                 app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/photo_iv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_et"
@@ -47,6 +56,7 @@
                     android:id="@+id/email_et"
                     style="@style/CustomTextInputEditText"
                     android:hint="@string/enter_email"
+                    android:inputType="textEmailAddress"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailTextChanged(text)}"
                     android:text="@{viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,6 +73,7 @@
                     android:id="@+id/phone_et"
                     style="@style/CustomTextInputEditText"
                     android:hint="@string/enter_phone"
+                    android:inputType="phone"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onPhoneTextChanged(text)}"
                     android:text="@{viewModel.phone}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +90,7 @@
                     android:id="@+id/dob_et"
                     style="@style/CustomTextInputEditText"
                     android:hint="@string/enter_dob"
+                    android:inputType="number"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onDOBTextChanged(text)}"
                     android:text="@{viewModel.dob}" />
             </com.google.android.material.textfield.TextInputLayout>

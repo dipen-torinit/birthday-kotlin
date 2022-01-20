@@ -18,4 +18,5 @@
     <string name="birthday_added_successfully">Birthday added successfully</string>
 
     <string name="enter_loginid_password">Enter login-id and password!</string>
+    <string name="set_profile_photo">Set profile photo</string>
 </resources>
