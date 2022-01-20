@@ -3,6 +3,12 @@ package com.birthday.kotlin.ui.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.birthday.kotlin.common.Validation.isDOBValid
+import com.birthday.kotlin.common.Validation.isEmailValid
+import com.birthday.kotlin.common.Validation.isNameValid
+import com.birthday.kotlin.common.Validation.isPhoneValid
+import com.birthday.kotlin.data.Person
+import com.birthday.kotlin.repository.BirthdayRepository
 import com.birthday.kotlin.ui.BaseViewModel
 import com.birthday.kotlin.utils.extention.empty
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +17,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddBirthdayViewModel @Inject constructor() : BaseViewModel() {
+class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: BirthdayRepository) : BaseViewModel() {
+
+    data class AddBirthdayError(
+        val nameError: String = String.empty(),
+        val emailError: String = String.empty(),
+        val phoneError: String = String.empty(),
+        val dobError: String = String.empty(),
+    )
 
     private val _name = MutableStateFlow(String.empty())
     val name: StateFlow<String> = _name
@@ -37,12 +50,54 @@ class AddBirthdayViewModel @Inject constructor() : BaseViewModel() {
         _dob.emit(text.toString())
     }
 
+    private val _error = MutableStateFlow(AddBirthdayError())
+    val error: StateFlow<AddBirthdayError> = _error
+
     val isFormValid: LiveData<Boolean> = combine(
         name,
         email,
         phone,
         dob
     ) { name, email, phone, dob ->
-        name.isNotEmpty() and email.isNotEmpty() and phone.isNotEmpty() and dob.isNotEmpty()
+        val isNameCorrect = isNameValid(name)
+        val isEmailCorrect = isEmailValid(email)
+        val isPhoneCorrect = isPhoneValid(phone)
+        val isDOBCorrect = isDOBValid(dob)
+
+        _error.emit(
+            AddBirthdayError(
+                nameError = if (isNameCorrect || name.isEmpty()) String.empty() else "Incorrect name",
+                emailError = if (isEmailCorrect || email.isEmpty()) String.empty() else "Incorrect email",
+                phoneError = if (isPhoneCorrect || phone.isEmpty()) String.empty() else "Incorrect phone",
+                dobError = if (isDOBCorrect || dob.isEmpty()) String.empty() else "Incorrect DOB"
+            )
+        )
+        isNameCorrect and isEmailCorrect and isPhoneCorrect and isDOBCorrect
     }.asLiveData()
+
+    private val _addResponse = MutableSharedFlow<Result<Boolean>>()
+    val addResponse = _addResponse.asSharedFlow()
+
+    fun addBirthday() = viewModelScope.launch {
+        startLoading()
+        _addResponse.emit(
+            birthdayRepository.addBirthday(
+                Person(
+                    name.value,
+                    email.value,
+                    phone.value,
+                    dob.value,
+                    ""
+                )
+            )
+        )
+        stopLoading()
+    }
+
+    fun cleanForm() = viewModelScope.launch {
+        _name.emit(String.empty())
+        _email.emit(String.empty())
+        _phone.emit(String.empty())
+        _dob.emit(String.empty())
+    }
 }

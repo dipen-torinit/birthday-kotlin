@@ -30,6 +30,10 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
     override fun setupViews() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.addBtn.setOnClickListener {
+            viewModel.addBirthday()
+        }
     }
 
     override fun executeCallsWhenResume() {
@@ -37,6 +41,13 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
     }
 
     override fun setupCollectors() {
-
+        collectFlow(viewModel.addResponse) {
+            if (it.isSuccess) {
+                viewModel.cleanForm()
+                showMessage(binding.root, R.string.birthday_added_successfully)
+            } else {
+                showMessage(binding.root, it.exceptionOrNull().toString())
+            }
+        }
     }
 }

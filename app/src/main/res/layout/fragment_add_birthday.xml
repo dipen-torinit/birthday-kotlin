@@ -22,6 +22,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_til"
                 style="@style/CustomTextInputLayout"
+                app:error="@{viewModel.error.nameError}"
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -36,6 +38,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_til"
                 style="@style/CustomTextInputLayout"
+                app:error="@{viewModel.error.emailError}"
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_til">
 
@@ -50,7 +54,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phone_til"
                 style="@style/CustomTextInputLayout"
-
+                app:error="@{viewModel.error.phoneError}"
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email_til">
 
@@ -65,6 +70,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dob_til"
                 style="@style/CustomTextInputLayout"
+                app:error="@{viewModel.error.dobError}"
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phone_til">
 

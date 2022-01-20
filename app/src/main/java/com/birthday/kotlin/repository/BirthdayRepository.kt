@@ -25,4 +25,16 @@ class BirthdayRepository @Inject constructor(
             Result.failure(e)
         }
     }
+
+    suspend fun addBirthday(person: Person): Result<Boolean> {
+        return try {
+            firebaseAuth.currentUser?.uid?.let { uid ->
+                firebasedb.getReference(uid + Constants.FIREBASE_TABLE_PEOPLE).push()
+                    .setValue(person.toMap()).await()
+            }
+            Result.success(true)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
