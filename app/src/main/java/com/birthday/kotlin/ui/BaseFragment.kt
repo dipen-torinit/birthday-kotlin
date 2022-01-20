@@ -1,8 +1,10 @@
 package com.birthday.kotlin.ui
 
-import android.widget.Toast
+import android.view.View
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
@@ -66,7 +68,9 @@ abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
         }
     }
 
-    fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-    }
+    fun showMessage(view: View, @StringRes message: Int) =
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+
+    fun showMessage(view: View, message: String) =
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }

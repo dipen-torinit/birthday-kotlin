@@ -40,7 +40,23 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override fun setupViews() {
         binding.loginBtn.setOnClickListener {
-            viewModel.signIn(binding.loginidEt.text.toString(), binding.passwordEt.text.toString())
+            val loginId = binding.loginidEt.text.toString()
+            val password = binding.passwordEt.text.toString()
+            if (loginId.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.signIn(loginId, password)
+            } else {
+                showMessage(binding.root, R.string.enter_loginid_password)
+            }
+        }
+
+        binding.signupBtn.setOnClickListener {
+            val loginId = binding.loginidEt.text.toString()
+            val password = binding.passwordEt.text.toString()
+            if (loginId.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.signUp(loginId, password)
+            } else {
+                showMessage(binding.root, R.string.enter_loginid_password)
+            }
         }
     }
 
@@ -112,7 +128,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (it.isSuccess) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationBirthdayList())
             } else {
-                showToast(it.exceptionOrNull().toString())
+                showMessage(binding.root, it.exceptionOrNull().toString())
+            }
+        })
+
+        collectFlow(viewModel.isSignUp, function = {
+            if (it.isSuccess) {
+                showMessage(binding.root, R.string.sign_up_success)
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationBirthdayList())
+            } else {
+                showMessage(binding.root, it.exceptionOrNull().toString())
             }
         })
 

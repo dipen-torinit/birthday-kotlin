@@ -16,6 +16,14 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth)
         )
     }
 
+    suspend fun signUp(email: String, password: String): FirebaseUser {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        return firebaseAuth.currentUser ?: throw FirebaseAuthException(
+            "SignUpError",
+            "Unable to sign up."
+        )
+    }
+
     fun checkIfAlreadyLoggedIn(): Boolean {
         return firebaseAuth.currentUser?.uid?.let {
             true

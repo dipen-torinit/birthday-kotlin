@@ -13,4 +13,8 @@
     <string name="enter_email">Enter email</string>
     <string name="enter_phone">Enter phone</string>
     <string name="enter_dob">Enter DOB(DD/MM/YYYY)</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_success">Signed up successfully</string>
+
+    <string name="enter_loginid_password">Enter login-id and password!</string>
 </resources>

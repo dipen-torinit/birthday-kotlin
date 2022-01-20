@@ -30,6 +30,22 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
         }
     }
 
+    private val _isSignUp = MutableSharedFlow<Result<FirebaseUser>>()
+    val isSignUp = _isSignUp.asSharedFlow()
+
+    fun signUp(email: String, password: String) = viewModelScope.launch {
+        startLoading()
+        try {
+            authRepository.signUp(email, password).let {
+                _isSignUp.emit(Result.success(it))
+                stopLoading()
+            }
+        } catch (e: Exception) {
+            _isSignUp.emit(Result.failure(e))
+            stopLoading()
+        }
+    }
+
     private val _isAlreadyLoggedIn = MutableSharedFlow<Boolean>()
     val isAlreadyLoggedIn = _isAlreadyLoggedIn.asSharedFlow()
 
