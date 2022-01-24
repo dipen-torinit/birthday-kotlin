@@ -1,8 +1,8 @@
 package com.birthday.kotlin.ui
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,12 +17,22 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import show
+import java.util.concurrent.atomic.AtomicInteger
 
 @AndroidEntryPoint
-class LauncherActivity : AppCompatActivity() {
+class LauncherActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLauncherBinding
     private val viewModel: LauncherViewModel by viewModels()
+
+    companion object {
+        private var _progressCounter = AtomicInteger(0)
+        var progressCounter: AtomicInteger
+            get() = _progressCounter
+            set(value) {
+                _progressCounter = value
+            }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +78,9 @@ class LauncherActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
-                R.id.navigation_birthday_list, R.id.navigation_add_birthday, R.id.navigation_settings
+                R.id.navigation_birthday_list,
+                R.id.navigation_add_birthday,
+                R.id.navigation_settings
             ),
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
@@ -86,11 +98,30 @@ class LauncherActivity : AppCompatActivity() {
         }
     }
 
-    fun showProgress(){
+    fun showProgress() {
+        progressCounter.getAndIncrement()
         binding.progressBar.show()
+        freezeScreen()
     }
 
-    fun hideProgress(){
-        binding.progressBar.hide()
+    fun hideProgress() {
+        progressCounter.decrementAndGet().let {
+            if (it <= 0) {
+                binding.progressBar.hide()
+                unfreezeScreen()
+                progressCounter.set(0)
+            }
+        }
+    }
+
+    private fun freezeScreen() {
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+    }
+
+    fun unfreezeScreen() {
+        this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 }
