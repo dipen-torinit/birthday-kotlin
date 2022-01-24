@@ -1,6 +1,7 @@
 package com.birthday.kotlin.ui.birthdaylist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -54,6 +55,10 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
                     )
                 }
             }
+        }
+
+        connectionLiveData.observe(this) {
+            Log.d("NETWORK", "Fragment: Network status $it")
         }
     }
 

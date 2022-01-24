@@ -43,6 +43,7 @@ class LauncherActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupViews()
+        setupCollectors()
     }
 
     override fun onStart() {
@@ -81,6 +82,14 @@ class LauncherActivity : BaseActivity() {
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun setupCollectors() {
+        connectionLiveData.observe(this) {
+            binding.internetConnectivityErrorTv.apply {
+                if (it) this.hide() else this.show()
+            }
+        }
     }
 
     fun setFullScreen(showFullScreen: Boolean) {

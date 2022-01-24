@@ -1,9 +1,11 @@
 package com.birthday.kotlin.ui
 
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.birthday.kotlin.common.ConnectionLiveData
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +15,14 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
+
+    protected lateinit var connectionLiveData: ConnectionLiveData
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        connectionLiveData = ConnectionLiveData(requireContext())
+    }
+
     fun setFullScreen(showFullScreen: Boolean) {
         (requireActivity() as LauncherActivity).setFullScreen(showFullScreen)
     }

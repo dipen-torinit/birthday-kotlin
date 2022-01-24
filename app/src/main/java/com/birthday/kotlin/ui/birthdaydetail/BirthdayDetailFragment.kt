@@ -15,7 +15,7 @@ class BirthdayDetailFragment : BaseFragment(R.layout.fragment_birthday_detail) {
     private val binding: FragmentBirthdayDetailBinding by viewBinding()
     private val viewModel: BirthdayDetailViewModel by viewModels()
 
-    val args: BirthdayDetailFragmentArgs by navArgs()
+    private val args: BirthdayDetailFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,8 +35,12 @@ class BirthdayDetailFragment : BaseFragment(R.layout.fragment_birthday_detail) {
     }
 
     override fun setupCollectors() {
+        collectFlow(viewModel.dummyResponse) {
+            showMessage(binding.root, it)
+        }
     }
 
     override fun executeCallsWhenResume() {
+
     }
 }
