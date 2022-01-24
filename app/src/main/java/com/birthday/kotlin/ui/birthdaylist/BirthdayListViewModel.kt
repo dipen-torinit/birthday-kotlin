@@ -14,8 +14,12 @@ import javax.inject.Inject
 @HiltViewModel
 class BirthdayListViewModel @Inject constructor(private val birthdayRepository: BirthdayRepository): BaseViewModel(){
 
-    private val _personsList = MutableSharedFlow<Result<List<Person>>>()
+    private val _personsList = MutableSharedFlow<Result<List<Person>>>(1)
     val personsList = _personsList.asSharedFlow()
+
+    init {
+        fetchBirthdays()
+    }
 
     fun fetchBirthdays() = viewModelScope.launch {
         startLoading()

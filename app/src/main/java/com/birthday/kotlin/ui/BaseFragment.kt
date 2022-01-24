@@ -17,12 +17,6 @@ abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
         (requireActivity() as LauncherActivity).setFullScreen(showFullScreen)
     }
 
-    fun showProgress(showProgress: Boolean) {
-        (requireActivity() as LauncherActivity).run {
-            if (showProgress) showProgress() else hideProgress()
-        }
-    }
-
     /*
     * Setup View, Listener etc.
     * */

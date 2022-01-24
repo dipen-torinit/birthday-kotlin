@@ -33,7 +33,11 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
     }
 
     override fun executeCallsWhenResume() {
-        viewModel.fetchBirthdays()
+        /*
+        * We can move this call to init method of ViewModel
+        * and avoid unnecessary execution of this method, when device rotated
+        * */
+//        viewModel.fetchBirthdays()
     }
 
     override fun setupCollectors() {

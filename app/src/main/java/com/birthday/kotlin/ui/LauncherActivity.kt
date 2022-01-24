@@ -26,12 +26,7 @@ class LauncherActivity : BaseActivity() {
     private val viewModel: LauncherViewModel by viewModels()
 
     companion object {
-        private var _progressCounter = AtomicInteger(0)
-        var progressCounter: AtomicInteger
-            get() = _progressCounter
-            set(value) {
-                _progressCounter = value
-            }
+        private var progressCounter = AtomicInteger(0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,13 +93,13 @@ class LauncherActivity : BaseActivity() {
         }
     }
 
-    fun showProgress() {
+    private fun showProgress() {
         progressCounter.getAndIncrement()
         binding.progressBar.show()
         freezeScreen()
     }
 
-    fun hideProgress() {
+    private fun hideProgress() {
         progressCounter.decrementAndGet().let {
             if (it <= 0) {
                 binding.progressBar.hide()
@@ -121,7 +116,7 @@ class LauncherActivity : BaseActivity() {
         )
     }
 
-    fun unfreezeScreen() {
+    private fun unfreezeScreen() {
         this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 }
