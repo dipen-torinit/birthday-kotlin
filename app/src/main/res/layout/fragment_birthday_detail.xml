@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.birthdaydetail.BirthdayDetailFragment">
+
+    <data>
+
+        <variable
+            name="person"
+            type="com.birthday.kotlin.data.Person" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/photo_iv"
+            bSetImageBitmap="@{person.image}"
+            android:layout_width="@dimen/dp200"
+            android:layout_height="@dimen/dp200"
+            android:src="@drawable/ic_baseline_person_add_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/CustomTextInputLayout"
+            android:text="@{person.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_iv" />
+
+        <TextView
+            android:id="@+id/email_tv"
+            style="@style/CustomTextInputLayout"
+            android:text="@{person.email}"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+
+        <TextView
+            android:id="@+id/phone_tv"
+            style="@style/CustomTextInputLayout"
+            android:text="@{person.phone}"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_tv" />
+
+        <TextView
+            android:id="@+id/dob_tv"
+            style="@style/CustomTextInputLayout"
+            android:text="@{person.date}"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

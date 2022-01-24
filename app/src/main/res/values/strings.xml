@@ -19,4 +19,5 @@
 
     <string name="enter_loginid_password">Enter login-id and password!</string>
     <string name="set_profile_photo">Set profile photo</string>
+    <string name="person_detail">Person Detail</string>
 </resources>

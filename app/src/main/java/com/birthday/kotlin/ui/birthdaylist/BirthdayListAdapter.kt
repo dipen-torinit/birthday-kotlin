@@ -11,7 +11,10 @@ import com.birthday.kotlin.data.Person
 import com.birthday.kotlin.databinding.BirthdayListItemBinding
 import com.bumptech.glide.Glide
 
-class BirthdayListAdapter(private val persons: List<Person>) :
+class BirthdayListAdapter(
+    private val persons: List<Person>,
+    private val onItemClick: (person: Person) -> Unit
+) :
     RecyclerView.Adapter<BirthdayListAdapter.ViewHolder>() {
 
     /**
@@ -44,6 +47,10 @@ class BirthdayListAdapter(private val persons: List<Person>) :
             emailTextView.text = persons[position].email
             phoneTextView.text = persons[position].phone
             dobTextView.text = persons[position].date
+
+            itemView.setOnClickListener {
+                onItemClick.invoke(persons[position])
+            }
         }
     }
 

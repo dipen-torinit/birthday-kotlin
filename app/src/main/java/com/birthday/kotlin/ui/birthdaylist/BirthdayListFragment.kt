@@ -3,6 +3,7 @@ package com.birthday.kotlin.ui.birthdaylist
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.birthday.kotlin.R
 import com.birthday.kotlin.databinding.FragmentBirthdayListBinding
@@ -41,7 +42,13 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
             if(it.isSuccess){
                 binding.birthdayListRv.adapter = BirthdayListAdapter(
                     it.getOrDefault(defaultValue = listOf())
-                )
+                ) {
+                    findNavController().navigate(
+                        BirthdayListFragmentDirections.actionNavigationBirthdayListToBirthdayDetailFragment(
+                            it
+                        )
+                    )
+                }
             }
         }
     }
