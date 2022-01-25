@@ -30,31 +30,39 @@
             android:id="@+id/name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp4"
-            app:layout_constraintStart_toEndOf="@+id/person_iv"
-            app:layout_constraintTop_toTopOf="@+id/person_iv" />
+            android:paddingHorizontal="@dimen/dp2"
+            app:layout_constraintBottom_toTopOf="@+id/email_textview"
+            app:layout_constraintStart_toEndOf="@+id/person_iv" />
 
         <TextView
             android:id="@+id/email_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp4"
+            android:paddingHorizontal="@dimen/dp8"
+            app:layout_constraintBottom_toTopOf="@+id/divider_view"
+            app:layout_constraintStart_toEndOf="@+id/person_iv" />
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp2"
+            app:layout_constraintBottom_toBottomOf="@+id/person_iv"
             app:layout_constraintStart_toEndOf="@+id/person_iv"
-            app:layout_constraintTop_toBottomOf="@+id/name_textview" />
+            app:layout_constraintTop_toTopOf="@+id/person_iv" />
 
         <TextView
             android:id="@+id/phone_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp4"
+            android:paddingHorizontal="@dimen/dp8"
             app:layout_constraintStart_toEndOf="@+id/person_iv"
-            app:layout_constraintTop_toBottomOf="@+id/email_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/divider_view" />
 
         <TextView
             android:id="@+id/dob_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp4"
+            android:paddingHorizontal="@dimen/dp2"
             app:layout_constraintStart_toEndOf="@+id/person_iv"
             app:layout_constraintTop_toBottomOf="@+id/phone_textview" />
     </androidx.constraintlayout.widget.ConstraintLayout>

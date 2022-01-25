@@ -9,9 +9,8 @@ fun Context.showDialogWithList(
     items: Array<String>,
     listeners: DialogInterface.OnClickListener
 ) {
-    val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-    builder.setTitle(resources.getString(dialogTitle))
-    builder.setItems(items, listeners)
-    val dialog = builder.create()
-    dialog.show()
+    AlertDialog.Builder(this).apply {
+        setTitle(resources.getString(dialogTitle))
+        setItems(items, listeners)
+    }.create().show()
 }

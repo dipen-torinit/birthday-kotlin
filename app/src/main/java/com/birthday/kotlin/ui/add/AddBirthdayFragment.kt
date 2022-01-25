@@ -1,8 +1,12 @@
 package com.birthday.kotlin.ui.add
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.view.MotionEvent
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
@@ -16,11 +20,13 @@ import com.birthday.kotlin.ui.BaseFragment
 import com.birthday.kotlin.utils.ImageUtils.createImageFile
 import com.birthday.kotlin.utils.ImageUtils.getBitmapFromUri
 import com.birthday.kotlin.utils.ImageUtils.rotateImageIfRequired
+import com.birthday.kotlin.utils.extention.empty
 import com.birthday.kotlin.utils.extention.showDialogWithList
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
@@ -43,6 +49,7 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
         executeCallsWhenResume()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun setupViews() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -52,7 +59,10 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
         }
 
         binding.photoIv.setOnClickListener {
-            activity?.showDialogWithList(R.string.set_profile_photo, resources.getStringArray(R.array.set_profile_photo)) { _, which ->
+            activity?.showDialogWithList(
+                R.string.set_profile_photo,
+                resources.getStringArray(R.array.set_profile_photo)
+            ) { _, which ->
                 when (which) {
                     0 -> {
                         //Check for CAMERA permission
@@ -69,6 +79,22 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
             it?.let {
                 binding.dobEt.setSelection(it.length)
             }
+        }
+
+        binding.phoneEt.setOnTouchListener { view, event ->
+            val DRAWABLE_RIGHT = 2
+
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= binding.phoneEt.right - binding.phoneEt.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
+                    permissionsBuilder(Manifest.permission.READ_CONTACTS).build().send {
+                        if (it.allGranted()) {
+                            resultLauncher.launch(null)
+                        }
+                    }
+                    return@setOnTouchListener true
+                }
+            }
+            return@setOnTouchListener false
         }
     }
 
@@ -133,4 +159,46 @@ class AddBirthdayFragment : BaseFragment(R.layout.fragment_add_birthday) {
                 }
             }
         }
+
+
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.PickContact()) { uri ->
+            viewModel.setPhoneNumber(retrievePhoneNumber(uri))
+        }
+
+    @SuppressLint("Range")
+    fun retrievePhoneNumber(uri: Uri): String {
+        var phoneNumber = String.empty()
+
+        val phone: Cursor? = activity?.contentResolver?.query(uri, null, null, null, null)
+        phone?.let {
+            if (it.moveToFirst()) {
+
+                val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
+                val hasNumber =
+                    (it.getInt(it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)))
+
+                if (hasNumber > 0) {
+                    val phoneCursor: Cursor? = activity?.contentResolver?.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", arrayOf(id),
+                        null
+                    )
+                    phoneCursor?.let {
+                        if (phoneCursor.moveToNext()) {
+                            phoneNumber = phoneCursor.getString(
+                                phoneCursor.getColumnIndex(
+                                    ContactsContract.CommonDataKinds.Phone.NUMBER
+                                )
+                            )
+                        }
+                        phoneCursor.close()
+                    }
+                }
+            }
+            it.close()
+        }
+        return phoneNumber
+    }
 }

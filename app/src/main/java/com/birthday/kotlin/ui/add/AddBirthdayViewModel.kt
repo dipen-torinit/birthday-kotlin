@@ -12,6 +12,7 @@ import com.birthday.kotlin.data.Person
 import com.birthday.kotlin.repository.BirthdayRepository
 import com.birthday.kotlin.ui.BaseViewModel
 import com.birthday.kotlin.utils.extention.empty
+import com.birthday.kotlin.utils.extention.removeWhitespaces
 import com.birthday.kotlin.utils.extention.toBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -51,6 +52,9 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     val phone: StateFlow<String> = _phone
     fun onPhoneTextChanged(text: CharSequence) = viewModelScope.launch {
         _phone.emit(text.toString())
+    }
+    fun setPhoneNumber(phone: String) = viewModelScope.launch {
+        _phone.emit(phone.removeWhitespaces())
     }
 
     private val _dob = MutableStateFlow(String.empty())

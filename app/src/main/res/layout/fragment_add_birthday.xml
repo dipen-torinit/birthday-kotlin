@@ -78,6 +78,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phone_et"
                     style="@style/CustomTextInputEditText"
+                    android:drawableEnd="@drawable/ic_baseline_contact_phone_24"
                     android:hint="@string/enter_phone"
                     android:inputType="phone"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onPhoneTextChanged(text)}"
