@@ -18,10 +18,14 @@ class BirthdayListViewModel @Inject constructor(private val birthdayRepository: 
     val personsList = _personsList.asSharedFlow()
 
     init {
+        initialCalls()
+    }
+
+    fun initialCalls() {
         fetchBirthdays()
     }
 
-    fun fetchBirthdays() = viewModelScope.launch {
+    private fun fetchBirthdays() = viewModelScope.launch {
         startLoading()
         _personsList.emit(birthdayRepository.fetchBirthdays())
         stopLoading()

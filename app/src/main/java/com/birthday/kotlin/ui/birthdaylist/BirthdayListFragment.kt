@@ -31,6 +31,10 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
 
     override fun setupViews() {
 
+        binding.swiperefreshLayout.setOnRefreshListener {
+            viewModel.initialCalls()
+        }
+
     }
 
     override fun executeCallsWhenResume() {
@@ -43,18 +47,18 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
 
     override fun setupCollectors() {
 
-        collectFlow(viewModel.personsList) {
-            if(it.isSuccess){
-                binding.birthdayListRv.adapter = BirthdayListAdapter(
-                    it.getOrDefault(defaultValue = listOf())
-                ) {
+        collectFlow(viewModel.personsList) { it ->
+
+            binding.birthdayListRv.adapter =
+                BirthdayListAdapter(it.getOrDefault(defaultValue = listOf())) { person ->
                     findNavController().navigate(
                         BirthdayListFragmentDirections.actionNavigationBirthdayListToBirthdayDetailFragment(
-                            it
+                            person
                         )
                     )
                 }
-            }
+
+            binding.swiperefreshLayout.isRefreshing = false
         }
 
         connectionLiveData.observe(this) {
