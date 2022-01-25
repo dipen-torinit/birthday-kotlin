@@ -19,14 +19,19 @@
             android:layout_height="match_parent"
             tools:context=".ui.add.AddBirthdayFragment">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/photo_iv"
                 android:layout_width="@dimen/dp200"
                 android:layout_height="@dimen/dp200"
+                android:padding="@dimen/dp4"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_baseline_person_add_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/Circular.ImageView"
+                app:strokeColor="@color/purple_200"
+                app:strokeWidth="@dimen/dp2" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_til"
@@ -40,6 +45,7 @@
                     android:id="@+id/name_et"
                     style="@style/CustomTextInputEditText"
                     android:hint="@string/enter_name"
+                    android:inputType="textCapWords"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
                     android:text="@{viewModel.name}" />
             </com.google.android.material.textfield.TextInputLayout>

@@ -15,15 +15,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/photo_iv"
             bSetImageBitmap="@{person.image}"
             android:layout_width="@dimen/dp200"
             android:layout_height="@dimen/dp200"
+            android:padding="@dimen/dp4"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_person_add_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Circular.ImageView"
+            app:strokeColor="@color/purple_200"
+            app:strokeWidth="@dimen/dp2" />
 
         <TextView
             android:id="@+id/name_tv"

@@ -2,7 +2,7 @@ package com.birthday.kotlin.common
 
 object Validation {
     fun isNameValid(name: String): Boolean {
-        return Regex("^[A-Za-z]{2,40}()+\$").containsMatchIn(name)
+        return Regex("^[A-Za-z\\s]{2,40}()+\$").containsMatchIn(name)
     }
 
     fun isEmailValid(email: String): Boolean {
