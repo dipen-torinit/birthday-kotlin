@@ -44,15 +44,19 @@ class LauncherActivity : BaseActivity() {
 
         setupViews()
         setupCollectors()
+        EventBus.getDefault().register(this);
     }
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this);
     }
 
     override fun onStop() {
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
 
