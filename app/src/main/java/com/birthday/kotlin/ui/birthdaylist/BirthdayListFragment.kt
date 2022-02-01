@@ -61,7 +61,7 @@ class BirthdayListFragment : BaseFragment(R.layout.fragment_birthday_list) {
             binding.swiperefreshLayout.isRefreshing = false
         }
 
-        connectionLiveData.observe(this) {
+        connectionLiveData.observe(viewLifecycleOwner) {
             Log.d("NETWORK", "Fragment: Network status $it")
         }
     }
