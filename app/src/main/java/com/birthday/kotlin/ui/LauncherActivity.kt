@@ -44,7 +44,7 @@ class LauncherActivity : BaseActivity() {
 
         setupViews()
         setupCollectors()
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this)
     }
 
     override fun onStart() {
