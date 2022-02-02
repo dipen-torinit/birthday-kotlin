@@ -85,4 +85,7 @@ dependencies {
 
     //Library for permission check
     implementation 'com.github.fondesa:kpermissions-coroutines:3.3.0'
+
+    //Added for using repeatOnLifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-alpha01"
 }

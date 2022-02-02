@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.birthday.kotlin.common.ConnectionLiveData
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
@@ -49,25 +52,31 @@ abstract class BaseFragment(layoutID: Int) : Fragment(layoutID) {
     abstract fun executeCallsWhenResume()
 
     fun <K> collectFlow(flow: SharedFlow<K>, function: (K) -> Unit) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            flow.collect {
-                function.invoke(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collect {
+                    function.invoke(it)
+                }
             }
         }
     }
 
     fun <K> collectFlow(flow: StateFlow<K>, function: (K) -> Unit) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            flow.collect {
-                function.invoke(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collect {
+                    function.invoke(it)
+                }
             }
         }
     }
 
     fun <K> collectFlow(flow: Flow<K>, function: (K) -> Unit) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            flow.collect {
-                function.invoke(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collect {
+                    function.invoke(it)
+                }
             }
         }
     }
