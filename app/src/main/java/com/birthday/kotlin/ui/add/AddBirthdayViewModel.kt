@@ -24,7 +24,7 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     BaseViewModel() {
 
     private val _photo = MutableStateFlow<Bitmap?>(null)
-    val photo: StateFlow<Bitmap?> = _photo
+    val photo: StateFlow<Bitmap?> = _photo.asStateFlow()
     fun setPhoto(photoBitmap: Bitmap) = viewModelScope.launch {
         _photo.emit(photoBitmap)
     }
@@ -37,19 +37,19 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     )
 
     private val _name = MutableStateFlow(String.empty())
-    val name: StateFlow<String> = _name
+    val name: StateFlow<String> = _name.asStateFlow()
     fun onNameTextChanged(text: CharSequence) = viewModelScope.launch {
         _name.emit(text.toString())
     }
 
     private val _email = MutableStateFlow(String.empty())
-    val email: StateFlow<String> = _email
+    val email: StateFlow<String> = _email.asStateFlow()
     fun onEmailTextChanged(text: CharSequence) = viewModelScope.launch {
         _email.emit(text.toString())
     }
 
     private val _phone = MutableStateFlow(String.empty())
-    val phone: StateFlow<String> = _phone
+    val phone: StateFlow<String> = _phone.asStateFlow()
     fun onPhoneTextChanged(text: CharSequence) = viewModelScope.launch {
         _phone.emit(text.toString())
     }
@@ -58,7 +58,7 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     }
 
     private val _dob = MutableStateFlow(String.empty())
-    val dob: StateFlow<String> = _dob
+    val dob: StateFlow<String> = _dob.asStateFlow()
     fun onDOBTextChanged(text: CharSequence) = viewModelScope.launch {
         if (text.length == 2 || text.length == 5) {
             _dob.emit("$text/")
@@ -68,7 +68,7 @@ class AddBirthdayViewModel @Inject constructor(private val birthdayRepository: B
     }
 
     private val _error = MutableStateFlow(AddBirthdayError())
-    val error: StateFlow<AddBirthdayError> = _error
+    val error: StateFlow<AddBirthdayError> = _error.asStateFlow()
 
     val isFormValid: LiveData<Boolean> = combine(
         name,
