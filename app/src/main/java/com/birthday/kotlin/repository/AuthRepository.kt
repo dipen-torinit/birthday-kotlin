@@ -1,39 +1,23 @@
 package com.birthday.kotlin.repository
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.tasks.await
+import com.birthday.kotlin.api.APIInterface
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth) {
+class AuthRepository @Inject constructor(private val apiService: APIInterface) {
 
-    suspend fun signIn(email: String, password: String): FirebaseUser {
-        firebaseAuth.signInWithEmailAndPassword(email, password).await()
-        return firebaseAuth.currentUser ?: throw FirebaseAuthException(
-            "SignInError",
-            "Unable to sign in."
-        )
+    suspend fun signIn(email: String, password: String): Boolean {
+        return apiService.signInWithEmailAndPassword(email, password)
     }
 
-    suspend fun signUp(email: String, password: String): FirebaseUser {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-        return firebaseAuth.currentUser ?: throw FirebaseAuthException(
-            "SignUpError",
-            "Unable to sign up."
-        )
+    suspend fun signUp(email: String, password: String): Boolean {
+        return apiService.createUserWithEmailAndPassword(email, password)
     }
 
     fun checkIfAlreadyLoggedIn(): Boolean {
-        return firebaseAuth.currentUser?.uid?.let {
-            true
-        } ?: run {
-            false
-        }
+        return apiService.checkIfAlreadyLoggedIn()
     }
 
     fun logOut(): Boolean {
-        firebaseAuth.signOut()
-        return true
+        return apiService.logOut()
     }
 }

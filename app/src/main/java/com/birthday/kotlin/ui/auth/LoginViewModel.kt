@@ -3,7 +3,6 @@ package com.birthday.kotlin.ui.auth
 import androidx.lifecycle.viewModelScope
 import com.birthday.kotlin.repository.AuthRepository
 import com.birthday.kotlin.ui.BaseViewModel
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -14,7 +13,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) :
     BaseViewModel() {
 
-    private val _isLogIn = MutableSharedFlow<Result<FirebaseUser>>()
+    private val _isLogIn = MutableSharedFlow<Result<Boolean>>()
     val isLogIn = _isLogIn.asSharedFlow()
 
     fun signIn(email: String, password: String) = viewModelScope.launch {
@@ -30,7 +29,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
         }
     }
 
-    private val _isSignUp = MutableSharedFlow<Result<FirebaseUser>>()
+    private val _isSignUp = MutableSharedFlow<Result<Boolean>>()
     val isSignUp = _isSignUp.asSharedFlow()
 
     fun signUp(email: String, password: String) = viewModelScope.launch {
